@@ -10,7 +10,25 @@ export const state = () => ({
       name: 'buy the Vue.js book',
       done: true
     }
-  ]
+  ],
+  nextTaskId: 3
 })
 
-export const mutations = {}
+export const mutations = {
+  addTask(state, { name }) {
+    state.list.push({
+      id: state.nextTaskId,
+      name,
+      done: false
+    })
+    state.nextTaskId++
+  },
+  toggleTaskStatus(state, { id }) {
+    const filtered = state.list.filter((task) => {
+      return task.id === id
+    })
+    filtered.forEach((task) => {
+      task.done = !task.done
+    })
+  }
+}
