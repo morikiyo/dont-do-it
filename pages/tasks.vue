@@ -36,16 +36,16 @@ export default {
   },
   computed: {
     tasks() {
-      return this.$store.state.tasks.list
+      return this.$store.state.tasks
     }
   },
   methods: {
     addTask() {
-      this.$store.commit('tasks/addTask', { name: this.newTaskName })
+      this.$store.commit('addTask', { name: this.newTaskName })
       this.newTaskName = ''
     },
     toggleTaskStatus(task) {
-      this.$store.commit('tasks/toggleTaskStatus', { id: task.id })
+      this.$store.commit('toggleTaskStatus', { id: task.id })
     }
   }
 }

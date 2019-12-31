@@ -1,5 +1,5 @@
 export const state = () => ({
-  list: [
+  tasks: [
     {
       id: 1,
       name: 'buy the milk',
@@ -16,7 +16,7 @@ export const state = () => ({
 
 export const mutations = {
   addTask(state, { name }) {
-    state.list.push({
+    state.tasks.push({
       id: state.nextTaskId,
       name,
       done: false
@@ -24,7 +24,7 @@ export const mutations = {
     state.nextTaskId++
   },
   toggleTaskStatus(state, { id }) {
-    const filtered = state.list.filter((task) => {
+    const filtered = state.tasks.filter((task) => {
       return task.id === id
     })
     filtered.forEach((task) => {
