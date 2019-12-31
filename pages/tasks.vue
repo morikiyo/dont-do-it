@@ -75,6 +75,20 @@
           フィルタしない
         </li>
       </ul>
+      <hr />
+      <h2>保存と復元</h2>
+      <div class="form-group row">
+        <button v-on:click="save" type="button" class="form-control col-sm-6">
+          保存
+        </button>
+        <button
+          v-on:click="restore"
+          type="button"
+          class="form-control col-sm-6"
+        >
+          復元
+        </button>
+      </div>
     </div>
   </div>
 </template>
@@ -123,6 +137,12 @@ export default {
     },
     changeFilter(labelId) {
       this.$store.commit('changeFilter', { filter: labelId })
+    },
+    save() {
+      this.$store.dispatch('save')
+    },
+    restore() {
+      this.$store.dispatch('restore')
     }
   }
 }
