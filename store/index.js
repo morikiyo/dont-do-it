@@ -25,8 +25,21 @@ export const state = () => ({
     },
     { id: 3, text: '本' }
   ],
-  nextLabelId: 4
+  nextLabelId: 4,
+  filter: null
 })
+
+export const getters = {
+  filteredTasks(state) {
+    if (!state.filter) {
+      return state.tasks
+    }
+
+    return state.tasks.filter((task) => {
+      return task.labelIds.includes(state.filter)
+    })
+  }
+}
 
 export const mutations = {
   addTask(state, { name, labelIds }) {
@@ -52,5 +65,8 @@ export const mutations = {
       text
     })
     state.nextLabelId++
+  },
+  changeFilter(state, { filter }) {
+    state.filter = filter
   }
 }
