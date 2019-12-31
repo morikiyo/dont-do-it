@@ -10,9 +10,12 @@
             type="checkbox"
           />
           {{ task.name }}
+          -
+          <span v-for="id in task.labelIds" v-bind:key="id">
+            {{ getLabelText(id) }}
+          </span>
         </li>
       </ul>
-      <hr />
       <form v-on:submit.prevent="addTask">
         <div class="form-group">
           <input
@@ -20,6 +23,32 @@
             type="text"
             class="form-control"
             placeholder="新しいタスク"
+          />
+        </div>
+      </form>
+      <hr />
+      <h2>ラベル一覧</h2>
+      <ul class="list-group">
+        <li
+          v-for="label in labels"
+          v-bind:key="label.id"
+          class="list-group-item"
+        >
+          <input
+            v-bind:value="label.id"
+            v-model="newTaskLabelIds"
+            type="checkbox"
+          />
+          {{ label.text }}
+        </li>
+      </ul>
+      <form v-on:submit.prevent="addLabel">
+        <div class="form-group">
+          <input
+            v-model="newLabelText"
+            type="text"
+            class="form-control"
+            placeholder="新しいラベル"
           />
         </div>
       </form>
@@ -31,21 +60,40 @@
 export default {
   data() {
     return {
-      newTaskName: ''
+      newTaskName: '',
+      newTaskLabelIds: [],
+      newLabelText: ''
     }
   },
   computed: {
     tasks() {
       return this.$store.state.tasks
+    },
+    labels() {
+      return this.$store.state.labels
     }
   },
   methods: {
     addTask() {
-      this.$store.commit('addTask', { name: this.newTaskName })
+      this.$store.commit('addTask', {
+        name: this.newTaskName,
+        labelIds: this.newTaskLabelIds
+      })
       this.newTaskName = ''
+      this.newTaskLabelIds = []
     },
     toggleTaskStatus(task) {
       this.$store.commit('toggleTaskStatus', { id: task.id })
+    },
+    addLabel() {
+      this.$store.commit('addLabel', {
+        text: this.newLabelText
+      })
+      this.newLabelText = ''
+    },
+    getLabelText(id) {
+      const label = this.labels.filter((label) => label.id === id)[0]
+      return label ? label.text : ''
     }
   }
 }
