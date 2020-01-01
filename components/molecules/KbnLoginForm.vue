@@ -1,6 +1,6 @@
 <template>
-  <form novalidate>
-    <div class="form-item">
+  <form novalidate="true">
+    <div class="form-group">
       <label for="email">メールアドレス</label>
       <input
         id="email"
@@ -9,6 +9,7 @@
         type="text"
         autocomplete="off"
         placeholder="ex. kanban@domain.com"
+        class="form-control"
       />
       <ul class="validation-errors">
         <li v-if="!validation.email.format">
@@ -19,7 +20,7 @@
         </li>
       </ul>
     </div>
-    <div class="form-item">
+    <div class="form-group">
       <label for="password">パスワード</label>
       <input
         id="password"
@@ -28,6 +29,7 @@
         type="password"
         autocomplete="off"
         placeholder="ex. ********"
+        class="form-control"
       />
       <ul class="validation-errors">
         <li v-if="!validation.password.required">
@@ -48,7 +50,7 @@
 <script>
 import KbnButton from '@/components/atoms/KbnButton'
 
-const REGEX_EMAIL = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[09]{1,3}\.[09]{1,3}\.[09]{1,3}\.[09]{1,3}\])|(([azAZ\09]+\.)+[azAZ]{2,}))$/
+const REGEX_EMAIL = /^\w+@example\.com$/
 const required = (val) => !!val.trim()
 
 export default {
@@ -128,31 +130,30 @@ export default {
 </script>
 
 <style lang="sass" scoped>
-form {
-  display: block;
-  margin: 0 auto;
-  text-align: left;
-}
-label {
-  display: block;
-}
-input {
-  width: 100%;
-  padding: 5em;
-  font: inherit;
-}
-ul {
-  list-style-type: none;
-  padding: 0;
-  margin: 0.25em 0;
-}
-ul li {
-  font-size: 0.5em;
-}
-.validation-errors {
-  height: 32px;
-}
-.form-actions p {
+form
+  display: block
+  margin: 0 auto
+  text-align: left
+
+label
+  display: block
+
+input
+  width: 100%
+  padding: .5em
+  font: inherit
+
+ul
+  list-style-type: none
+  padding: 0
+  margin: 0.25em 0
+
+ul li
   font-size: 0.5em
-}
+
+.validation-errors
+  height: 32px
+
+.form-actions p
+  font-size: 0.5em
 </style>
