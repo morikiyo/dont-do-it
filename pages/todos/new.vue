@@ -1,7 +1,7 @@
 <template>
   <div>
     <h2>New Task</h2>
-    <b-form @submit="onSubmit">
+    <b-form @submit.prevent="onSubmit">
       <b-form-group>
         <b-form-input
           id="title"
@@ -36,9 +36,9 @@ export default {
     }
   },
   methods: {
-    onSubmit(event) {
-      event.preventDefault()
-      alert(JSON.stringify(this.form))
+    onSubmit() {
+      this.$store.dispatch('todos/create', this.form)
+      this.$router.push('/')
     }
   }
 }

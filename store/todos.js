@@ -47,7 +47,7 @@ export const getters = {
 
 export const mutations = {
   create(state, { title, comment }) {
-    state.tasks.push({
+    state.all.push({
       id: state.nextTaskId,
       title,
       comment,
