@@ -2,21 +2,21 @@ export const state = () => ({
   all: [
     {
       id: 1,
-      name: '新規タスクの追加機能を作る',
+      title: '新規タスクの追加機能を作る',
       comment: 'ボタンを押す',
       closedAt: null,
       resumeAt: null
     },
     {
       id: 2,
-      name: 'Vue.jsの本を買う',
+      title: 'Vue.jsの本を買う',
       comment: 'Vue.js入門 基礎からアプリケーション開発まで',
       closedAt: null,
       resumeAt: new Date(2020, 1, 3, 4, 0, 0).getTime()
     },
     {
       id: 3,
-      name: 'クローズしたもの',
+      title: 'クローズしたもの',
       comment: 'クローズのサンプル',
       closedAt: Date.now(),
       resumeAt: null
@@ -46,10 +46,10 @@ export const getters = {
 }
 
 export const mutations = {
-  create(state, { name, comment }) {
+  create(state, { title, comment }) {
     state.tasks.push({
       id: state.nextTaskId,
-      name,
+      title,
       comment,
       closedAt: null,
       resumeAt: null
@@ -58,15 +58,15 @@ export const mutations = {
   },
   update(state, payload) {
     const task = state.getters.find(payload.id)
-    Object.assign(task, { name: payload.name, comment: payload.comment })
+    Object.assign(task, { title: payload.title, comment: payload.comment })
   }
 }
 
 export const actions = {
-  create({ commit }, attributes) {
+  create({ commit }, payload) {
     commit('create', {
-      name: attributes.name,
-      comment: attributes.comment
+      title: payload.title,
+      comment: payload.comment
     })
   }
   // tasks/update

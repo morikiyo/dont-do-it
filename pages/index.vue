@@ -1,8 +1,8 @@
 <template>
-  <div class="m-4">
+  <div>
     <h2>todos</h2>
     <div class="my-2 text-right">
-      <b-button v-on:click="openModal" variant="primary">New Task</b-button>
+      <b-button v-on:click="clickNewTask" variant="primary">New Task</b-button>
     </div>
     <b-card no-body>
       <b-tabs card>
@@ -29,8 +29,9 @@ export default {
     TodoList
   },
   methods: {
-    openModal() {
-      alert('hello')
+    clickNewTask() {
+      // TODO: change route path to '/tasks/new'
+      this.$router.push('/todos/new')
     }
   }
 }

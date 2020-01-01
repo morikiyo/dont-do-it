@@ -2,7 +2,7 @@
   <div>
     <ul class="list-group">
       <li v-for="task in tasks" v-bind:key="task.id" class="list-group-item">
-        {{ task.name }}
+        {{ task.title }}
       </li>
     </ul>
   </div>
