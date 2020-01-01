@@ -36,8 +36,15 @@ export default {
     }
   },
   methods: {
+    // clear() {
+    //   this.form = {
+    //     title: '',
+    //     comment: ''
+    //   }
+    // },
     onSubmit() {
       this.$store.dispatch('todos/create', this.form)
+      // this.$bvToast.toast('Created new task.')
       this.$router.push('/')
     }
   }
