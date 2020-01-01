@@ -26,7 +26,8 @@ export const state = () => ({
     { id: 3, text: '本' }
   ],
   nextLabelId: 4,
-  filter: null
+  filter: null,
+  auth: null
 })
 
 export const getters = {
@@ -74,6 +75,9 @@ export const mutations = {
     state.labels = labels
     state.nextTaskId = nextTaskId
     state.nextLabelId = nextLabelId
+  },
+  authLogin(state, payload) {
+    state.auth = payload
   }
 }
 
@@ -92,5 +96,20 @@ export const actions = {
     if (data) {
       commit('restore', JSON.parse(data))
     }
+  },
+  login({ commit }, authInfo) {
+    // TODO: call authentication API
+    // return Auth.login(authInfo)
+    //   .then(({ token, userId }) => {
+    //     commit('authLogin', { token, userId })
+    //   })
+    //   .catch((err) => {
+    //     throw err
+    //   })
+
+    commit('authLogin', {
+      token: 'xxx',
+      userId: 1
+    })
   }
 }
