@@ -12,10 +12,17 @@ export const state = () => ({
       name: 'Vue.jsの本を買う',
       comment: 'Vue.js入門 基礎からアプリケーション開発まで',
       closedAt: null,
+      resumeAt: new Date(2020, 1, 3, 4, 0, 0).getTime()
+    },
+    {
+      id: 3,
+      name: 'クローズしたもの',
+      comment: 'クローズのサンプル',
+      closedAt: Date.now(),
       resumeAt: null
     }
   ],
-  nextTaskId: 3
+  nextTaskId: 4
 })
 
 export const getters = {
@@ -23,9 +30,12 @@ export const getters = {
     return state.all.filter((task) => {
       return (
         task.closedAt === null &&
-        (task.resumeAt === null || task.resumeAt <= new Date().getTime())
+        (task.resumeAt === null || task.resumeAt <= Date.now())
       )
     })
+  },
+  all(state) {
+    return state.all.filter((task) => task.closedAt === null)
   },
   closed(state) {
     return state.all.filter((task) => task.closedAt !== null)

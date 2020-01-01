@@ -11,9 +11,15 @@
 <script>
 export default {
   name: 'TodoList',
+  props: {
+    filter: {
+      type: String,
+      default: 'inbox'
+    }
+  },
   computed: {
     tasks() {
-      return this.$store.getters['todo/inbox']
+      return this.$store.getters[`todos/${this.filter}`]
     }
   }
 }
