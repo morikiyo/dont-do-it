@@ -2,16 +2,29 @@
   <div>
     <b-card header-tag="header" fotter-tag="footer">
       <template v-slot:header>
-        <div class="d-flex d-flex justify-content-between">
+        <div
+          v-if="titleIsShowing"
+          class="d-flex align-items-center justify-content-between"
+        >
           <h4 class="mb-0">{{ task.title }}</h4>
           <div>
-            <b-button size="sm" variant="outline-secondary">Edit</b-button>
+            <b-link @click="editTitle">Edit</b-link>
+          </div>
+        </div>
+        <div v-else class="d-flex align-items-center justify-content-between">
+          <div class="flex-fill mr-2">
+            <b-form-input v-model="form.title.value" type="text" width="auto" />
+          </div>
+          <div>
+            <b-button @click="saveTitle" size="sm" variant="primary">
+              Save
+            </b-button>
             <b-button
-              @click="$router.push('/todos/new')"
+              @click="cancelEditingTitle"
               size="sm"
-              variant="primary"
+              variant="outline-secondary"
             >
-              New Task
+              Cancel
             </b-button>
           </div>
         </div>
@@ -60,6 +73,10 @@ export default {
   data() {
     return {
       form: {
+        title: {
+          isEditing: false,
+          value: ''
+        },
         comment: {
           isEditing: false,
           value: ''
@@ -71,14 +88,29 @@ export default {
     task() {
       return this.$store.getters['todos/findById'](this.dataId)
     },
-    // commentIsEditing() {
-    //   return this.form.comment.isEditing
-    // },
+    titleIsShowing() {
+      return !this.form.title.isEditing
+    },
     commentIsShowing() {
       return !this.form.comment.isEditing
     }
   },
   methods: {
+    editTitle() {
+      this.form.title.value = this.task.title
+      this.form.title.isEditing = true
+    },
+    cancelEditingTitle() {
+      this.form.title.isEditing = false
+    },
+    saveTitle() {
+      const payload = {
+        id: this.dataId,
+        title: this.form.title.value
+      }
+      this.$store.dispatch('todos/update', payload)
+      this.form.title.isEditing = false
+    },
     editComment() {
       this.form.comment.value = this.task.comment
       this.form.comment.isEditing = true
@@ -92,7 +124,7 @@ export default {
         comment: this.form.comment.value
       }
       this.$store.dispatch('todos/update', payload)
-      this.cancelEditingComment()
+      this.form.comment.isEditing = false
     }
   }
 }
