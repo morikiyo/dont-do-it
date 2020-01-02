@@ -9,8 +9,19 @@
         <b-link @click="onClickShow(task.id)" no-prefetch>
           {{ task.title }}
         </b-link>
-        <b-button @click="onClickResumeTomorrow(task.id)" size="sm">
+        <b-button
+          v-if="filter === 'inbox'"
+          @click="resumeTomorrow(task.id)"
+          size="sm"
+        >
           don't do it
+        </b-button>
+        <b-button
+          v-else-if="filter === 'all' && task.resumeAt"
+          @click="resumeOff(task.id)"
+          size="sm"
+        >
+          just do it
         </b-button>
       </b-list-group-item>
     </b-list-group>
@@ -38,9 +49,12 @@ export default {
     onClickShow(id) {
       this.$router.push(`/todos/${id}`)
     },
-    onClickResumeTomorrow(id) {
-      // TODO: resume at tomorrow 4:00am
-      alert(id)
+    resumeTomorrow(id) {
+      this.$store.dispatch('todos/resumeTomorrow', { id })
+    },
+    resumeOff(id) {
+      this.$store.dispatch('todos/resumeOff', { id })
+      this.$emit('on-resume-off')
     }
   }
 }

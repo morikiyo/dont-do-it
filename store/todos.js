@@ -4,35 +4,35 @@ export const state = () => ({
       id: 1,
       title: '新規タスクの追加機能を作る',
       comment: 'ボタンを押す',
-      closedAt: new Date(2020, 1, 2, 5, 0, 0).getTime(),
+      closedAt: new Date(2020, 0, 2, 5, 0, 0).getTime(),
       resumeAt: null
     },
     {
       id: 2,
       title: '表示機能を作る',
       comment: 'markdown で表示すること',
-      closedAt: new Date(2020, 1, 2, 12, 43, 0).getTime(),
+      closedAt: new Date(2020, 0, 2, 12, 43, 0).getTime(),
       resumeAt: null
     },
     {
       id: 3,
       title: 'コメントの編集機能を作る',
       comment: '',
-      closedAt: new Date(2020, 1, 2, 13, 37, 0).getTime(),
+      closedAt: new Date(2020, 0, 2, 13, 37, 0).getTime(),
       resumeAt: null
     },
     {
       id: 4,
       title: 'タイトルの編集機能を作る',
       comment: '',
-      closedAt: new Date(2020, 1, 2, 14, 20, 0).getTime(),
+      closedAt: new Date(2020, 0, 2, 14, 20, 0).getTime(),
       resumeAt: null
     },
     {
       id: 5,
       title: '「今日はしない」を作る',
       comment: 'ついでに Close も追加して',
-      closedAt: null,
+      closedAt: new Date(2020, 0, 2, 15, 9, 0).getTime(),
       resumeAt: null
     },
     {
@@ -117,6 +117,9 @@ export const mutations = {
     if (payload.closedAt !== undefined) {
       task.closedAt = payload.closedAt
     }
+    if (payload.resumeAt !== undefined) {
+      task.resumeAt = payload.resumeAt
+    }
   }
 }
 
@@ -140,6 +143,29 @@ export const actions = {
     commit('update', {
       id: payload.id,
       closedAt: null
+    })
+  },
+  resumeTomorrow({ commit }, payload) {
+    // TODO: locale は考慮されてる？
+    const now = new Date()
+    const today = new Date(
+      now.getFullYear(),
+      now.getMonth(),
+      now.getDate(),
+      4,
+      0,
+      0
+    )
+    const resumeAt = today.getTime() + 24 * 60 * 60 * 1000
+    commit('update', {
+      id: payload.id,
+      resumeAt
+    })
+  },
+  resumeOff({ commit }, payload) {
+    commit('update', {
+      id: payload.id,
+      resumeAt: null
     })
   }
 }

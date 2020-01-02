@@ -9,12 +9,14 @@
       </div>
     </div>
     <b-card no-body>
-      <b-tabs card>
-        <b-tab title="inbox" active>
+      <b-tabs v-model="tabIndex" card>
+        <b-tab title="inbox">
           <b-card-text><TodoList /></b-card-text>
         </b-tab>
         <b-tab title="all">
-          <b-card-text><TodoList filter="all"/></b-card-text>
+          <b-card-text>
+            <TodoList @on-resume-off="selectInbox" filter="all" />
+          </b-card-text>
         </b-tab>
         <b-tab title="closed">
           <b-card-text><TodoList filter="closed"/></b-card-text>
@@ -31,10 +33,18 @@ export default {
   components: {
     TodoList
   },
+  data() {
+    return {
+      tabIndex: 0
+    }
+  },
   methods: {
     clickNewTask() {
       // TODO: change route path to '/tasks/new'
       this.$router.push('/todos/new')
+    },
+    selectInbox() {
+      this.tabIndex = 0
     }
   }
 }
