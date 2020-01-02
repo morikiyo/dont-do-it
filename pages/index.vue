@@ -10,7 +10,6 @@
     </div>
     <b-card no-body>
       <b-tabs card>
-        <b-card-header></b-card-header>
         <b-tab title="inbox" active>
           <b-card-text><TodoList /></b-card-text>
         </b-tab>
