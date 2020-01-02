@@ -46,7 +46,7 @@ export const state = () => ({
       id: 7,
       title: 'リファクタ：不要なソースは削除する',
       comment: '',
-      closedAt: null,
+      closedAt: new Date(2020, 0, 2, 16, 47, 0).getTime(),
       resumeAt: null
     },
     {
@@ -96,7 +96,7 @@ export const getters = {
 
 export const mutations = {
   create(state, { title, comment }) {
-    state.all.push({
+    state.all.unshift({
       id: state.nextTaskId,
       title,
       comment,
