@@ -11,7 +11,7 @@ export const state = () => ({
       id: 2,
       title: '表示機能を作る',
       comment: 'markdown で表示すること',
-      closedAt: null,
+      closedAt: new Date(2020, 1, 2, 12, 43, 0).getTime(),
       resumeAt: null
     },
     {
