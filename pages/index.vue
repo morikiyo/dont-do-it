@@ -2,7 +2,9 @@
   <div>
     <h2>todos</h2>
     <div class="my-2 text-right">
-      <b-button v-on:click="clickNewTask" variant="primary">New Task</b-button>
+      <b-button @click="clickNewTask" variant="primary" size="sm">
+        New Task
+      </b-button>
     </div>
     <b-card no-body>
       <b-tabs card>

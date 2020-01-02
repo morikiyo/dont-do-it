@@ -20,7 +20,9 @@
         />
       </b-form-group>
       <b-button type="submit" variant="primary">Create</b-button>
-      <b-button href="/" variant="outline-secondary">Cancel</b-button>
+      <b-button @click="$router.back()" variant="outline-secondary">
+        Cancel
+      </b-button>
     </b-form>
   </div>
 </template>
