@@ -17,7 +17,7 @@
           don't do it
         </b-button>
         <b-button
-          v-else-if="filter === 'all' && task.resumeAt"
+          v-else-if="filter === 'all' && Date.now() < task.resumeAt"
           @click="resumeOff(task.id)"
           size="sm"
         >
