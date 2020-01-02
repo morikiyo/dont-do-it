@@ -30,7 +30,10 @@
         </div>
       </template>
       <b-card-text>
-        <div v-if="commentIsShowing" v-html="$md.render(task.comment)"></div>
+        <div v-if="commentIsShowing">
+          <div v-html="$md.render(task.comment)"></div>
+          <b-link @click="editComment">Edit</b-link>
+        </div>
         <div v-else>
           <b-form-group>
             <b-form-textarea
@@ -50,11 +53,16 @@
         </div>
       </b-card-text>
       <template v-slot:footer>
-        <div class="d-flex d-flex justify-content-between">
+        <div class="d-flex align-items-center justify-content-between">
           <b-link @click="$router.back()">Back</b-link>
-          <b-link v-if="commentIsShowing" @click="editComment">
-            Edit
-          </b-link>
+          <div v-if="commentIsShowing">
+            <b-button @click="openTask" v-if="isClosed" variant="primary">
+              Open
+            </b-button>
+            <b-button @click="closeTask" v-else variant="primary">
+              Close
+            </b-button>
+          </div>
         </div>
       </template>
     </b-card>
@@ -93,6 +101,9 @@ export default {
     },
     commentIsShowing() {
       return !this.form.comment.isEditing
+    },
+    isClosed() {
+      return this.task.closedAt !== null
     }
   },
   methods: {
@@ -125,6 +136,14 @@ export default {
       }
       this.$store.dispatch('todos/update', payload)
       this.form.comment.isEditing = false
+    },
+    closeTask() {
+      this.$store.dispatch('todos/close', { id: this.dataId })
+      this.$router.back()
+    },
+    openTask() {
+      this.$store.dispatch('todos/open', { id: this.dataId })
+      this.$router.back()
     }
   }
 }

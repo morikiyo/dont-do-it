@@ -25,13 +25,13 @@ export const state = () => ({
       id: 4,
       title: 'タイトルの編集機能を作る',
       comment: '',
-      closedAt: null,
+      closedAt: new Date(2020, 1, 2, 14, 20, 0).getTime(),
       resumeAt: null
     },
     {
       id: 5,
       title: '「今日はしない」を作る',
-      comment: '',
+      comment: 'ついでに Close も追加して',
       closedAt: null,
       resumeAt: null
     },
@@ -114,6 +114,9 @@ export const mutations = {
     if (payload.comment !== undefined) {
       task.comment = payload.comment
     }
+    if (payload.closedAt !== undefined) {
+      task.closedAt = payload.closedAt
+    }
   }
 }
 
@@ -126,6 +129,17 @@ export const actions = {
   },
   update({ commit }, payload) {
     commit('update', payload)
+  },
+  close({ commit }, payload) {
+    commit('update', {
+      id: payload.id,
+      closedAt: Date.now()
+    })
+  },
+  open({ commit }, payload) {
+    commit('update', {
+      id: payload.id,
+      closedAt: null
+    })
   }
-  // tasks/
 }
