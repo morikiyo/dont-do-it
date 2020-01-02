@@ -51,10 +51,7 @@ export default {
     }
   },
   computed: {},
-  mounted() {
-    this.task = this.$store.getters['todos/findById'](this.dataId)
-  },
-  updated() {
+  created() {
     this.task = this.$store.getters['todos/findById'](this.dataId)
   }
 }
