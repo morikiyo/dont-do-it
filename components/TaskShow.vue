@@ -94,7 +94,7 @@ export default {
   },
   computed: {
     task() {
-      return this.$store.getters['todos/findById'](this.dataId)
+      return this.$store.getters['tasks/findById'](this.dataId)
     },
     titleIsShowing() {
       return !this.form.title.isEditing
@@ -119,7 +119,7 @@ export default {
         id: this.dataId,
         title: this.form.title.value
       }
-      this.$store.dispatch('todos/update', payload)
+      this.$store.dispatch('tasks/update', payload)
       this.form.title.isEditing = false
     },
     editComment() {
@@ -134,15 +134,15 @@ export default {
         id: this.dataId,
         comment: this.form.comment.value
       }
-      this.$store.dispatch('todos/update', payload)
+      this.$store.dispatch('tasks/update', payload)
       this.form.comment.isEditing = false
     },
     closeTask() {
-      this.$store.dispatch('todos/close', { id: this.dataId })
+      this.$store.dispatch('tasks/close', { id: this.dataId })
       this.$router.back()
     },
     openTask() {
-      this.$store.dispatch('todos/open', { id: this.dataId })
+      this.$store.dispatch('tasks/open', { id: this.dataId })
       this.$router.back()
     }
   }

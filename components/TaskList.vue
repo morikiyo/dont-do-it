@@ -42,18 +42,18 @@ export default {
   },
   computed: {
     tasks() {
-      return this.$store.getters[`todos/${this.filter}`]
+      return this.$store.getters[`tasks/${this.filter}`]
     }
   },
   methods: {
     onClickShow(id) {
-      this.$router.push(`/todos/${id}`)
+      this.$router.push(`/tasks/${id}`)
     },
     resumeTomorrow(id) {
-      this.$store.dispatch('todos/resumeTomorrow', { id })
+      this.$store.dispatch('tasks/resumeTomorrow', { id })
     },
     resumeOff(id) {
-      this.$store.dispatch('todos/resumeOff', { id })
+      this.$store.dispatch('tasks/resumeOff', { id })
       this.$emit('on-resume-off')
     }
   }

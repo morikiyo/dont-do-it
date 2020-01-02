@@ -50,7 +50,7 @@ export default {
     //   }
     // },
     onSubmit() {
-      this.$store.dispatch('todos/create', this.form)
+      this.$store.dispatch('tasks/create', this.form)
       // this.$bvToast.toast('Created new task.')
       this.$router.push('/')
     }
