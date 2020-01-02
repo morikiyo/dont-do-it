@@ -17,9 +17,7 @@
         </div>
       </template>
       <b-card-text>
-        <div>
-          {{ task.comment }}
-        </div>
+        <div v-html="$md.render(task.comment)"></div>
       </b-card-text>
       <template v-slot:footer>
         <div class="d-flex d-flex justify-content-between">

@@ -40,7 +40,8 @@ export default {
    */
   modules: [
     // Doc: https://bootstrap-vue.js.org
-    'bootstrap-vue/nuxt'
+    'bootstrap-vue/nuxt',
+    '@nuxtjs/markdownit'
   ],
   /*
    ** Build configuration
@@ -50,5 +51,13 @@ export default {
      ** You can extend webpack config here
      */
     extend(config, ctx) {}
+  },
+  // See: https://github.com/nuxt-community/modules/tree/master/packages/markdownit
+  markdownit: {
+    preset: 'default',
+    linkify: true,
+    breaks: true,
+    injected: true,
+    use: []
   }
 }

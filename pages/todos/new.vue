@@ -18,6 +18,11 @@
           placeholder="Comment"
           rows="6"
         />
+        <b-card class="mt-2">
+          <b-card-text>
+            <div v-html="$md.render(form.comment)"></div>
+          </b-card-text>
+        </b-card>
       </b-form-group>
       <b-button type="submit" variant="primary">Create</b-button>
       <b-button @click="$router.back()" variant="outline-secondary">
