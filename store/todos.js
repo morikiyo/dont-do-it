@@ -18,7 +18,7 @@ export const state = () => ({
       id: 3,
       title: 'コメントの編集機能を作る',
       comment: '',
-      closedAt: null,
+      closedAt: new Date(2020, 1, 2, 13, 37, 0).getTime(),
       resumeAt: null
     },
     {
