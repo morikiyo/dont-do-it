@@ -1,10 +1,12 @@
 <template>
   <div>
-    <h2>todos</h2>
-    <div class="my-2 text-right">
-      <b-button @click="clickNewTask" variant="primary" size="sm">
-        New Task
-      </b-button>
+    <div class="d-flex justify-content-between">
+      <h2>Tasks</h2>
+      <div>
+        <b-button @click="clickNewTask" variant="primary">
+          New Task
+        </b-button>
+      </div>
     </div>
     <b-card no-body>
       <b-tabs card>
