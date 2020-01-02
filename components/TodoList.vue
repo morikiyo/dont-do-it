@@ -6,7 +6,9 @@
         v-bind:key="task.id"
         class="d-flex justify-content-between align-items-center"
       >
-        <b-link @click="onClickShow(task.id)">{{ task.title }}</b-link>
+        <b-link @click="onClickShow(task.id)" no-prefetch>
+          {{ task.title }}
+        </b-link>
         <b-button @click="onClickResumeTomorrow(task.id)" size="sm">
           don't do it
         </b-button>
