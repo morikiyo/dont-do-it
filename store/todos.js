@@ -106,8 +106,14 @@ export const mutations = {
     state.nextTaskId++
   },
   update(state, payload) {
-    const task = state.getters.find(payload.id)
-    Object.assign(task, { title: payload.title, comment: payload.comment })
+    const task = state.all.find((task) => task.id === payload.id)
+    // TODO: DRY
+    if (payload.title !== undefined) {
+      task.title = payload.title
+    }
+    if (payload.comment !== undefined) {
+      task.comment = payload.comment
+    }
   }
 }
 
@@ -117,7 +123,9 @@ export const actions = {
       title: payload.title,
       comment: payload.comment
     })
+  },
+  update({ commit }, payload) {
+    commit('update', payload)
   }
-  // tasks/update
   // tasks/
 }
