@@ -10,7 +10,7 @@ export const state = () => ({
     {
       id: 2,
       title: '表示機能を作る',
-      comment: 'Vue.js入門 基礎からアプリケーション開発まで',
+      comment: 'markdown で表示すること',
       closedAt: null,
       resumeAt: null
     },
