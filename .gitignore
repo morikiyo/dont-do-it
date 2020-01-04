@@ -91,3 +91,6 @@ sw.*
 
 # VSCode history
 .history/
+
+# Secret Configs
+secrets/
