@@ -2,23 +2,23 @@
   <div>
     <b-list-group>
       <b-list-group-item
-        v-for="task in tasks"
-        v-bind:key="task.id"
+        v-for="(task, key) in tasks"
+        v-bind:key="key"
         class="d-flex justify-content-between align-items-center"
       >
-        <b-link @click="onClickShow(task.id)" no-prefetch>
+        <b-link @click="showTask(key)" no-prefetch>
           {{ task.title }}
         </b-link>
         <b-button
           v-if="filter === 'inbox'"
-          @click="resumeTomorrow(task.id)"
+          @click="resumeTaskTomorrow(key)"
           size="sm"
         >
           don't do it
         </b-button>
         <b-button
           v-else-if="filter === 'all' && Date.now() < task.resumeAt"
-          @click="resumeOff(task.id)"
+          @click="resumeTaskOff(key)"
           size="sm"
         >
           just do it
@@ -42,18 +42,18 @@ export default {
   },
   computed: {
     tasks() {
-      return this.$store.getters[`tasks/${this.filter}`]
+      return this.$store.getters[this.filter]
     }
   },
   methods: {
-    onClickShow(id) {
-      this.$router.push(`/tasks/${id}`)
+    showTask(key) {
+      this.$router.push(`/tasks/${key}`)
     },
-    resumeTomorrow(id) {
-      this.$store.dispatch('tasks/resumeTomorrow', { id })
+    resumeTaskTomorrow(key) {
+      this.$store.dispatch('resumeTaskTomorrow', { key })
     },
-    resumeOff(id) {
-      this.$store.dispatch('tasks/resumeOff', { id })
+    resumeTaskOff(key) {
+      this.$store.dispatch('resumeTaskOff', { key })
       this.$emit('on-resume-off')
     }
   }

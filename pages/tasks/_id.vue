@@ -13,7 +13,7 @@ export default {
   },
   computed: {
     dataId() {
-      return parseInt(this.$route.params.id, 10)
+      return this.$route.params.id
     }
   }
 }

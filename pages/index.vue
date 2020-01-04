@@ -38,6 +38,10 @@ export default {
       tabIndex: 0
     }
   },
+  fetch({ store }) {
+    // TODO: binding されてなければ全てのページで bindTask したい
+    store.dispatch('bindTasks')
+  },
   methods: {
     selectInbox() {
       this.tabIndex = 0

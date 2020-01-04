@@ -74,7 +74,7 @@ export default {
   name: 'TaskShow',
   props: {
     dataId: {
-      type: Number,
+      type: String,
       required: true
     }
   },
@@ -94,7 +94,7 @@ export default {
   },
   computed: {
     task() {
-      return this.$store.getters['tasks/findById'](this.dataId)
+      return this.$store.state.tasks[this.dataId]
     },
     titleIsShowing() {
       return !this.form.title.isEditing
@@ -103,7 +103,11 @@ export default {
       return !this.form.comment.isEditing
     },
     isClosed() {
-      return this.task.closedAt !== null
+      return (
+        this.task.closedAt !== undefined &&
+        this.task.closedAt !== null &&
+        this.task.closedAt > 0
+      )
     }
   },
   methods: {
@@ -116,10 +120,10 @@ export default {
     },
     saveTitle() {
       const payload = {
-        id: this.dataId,
+        key: this.dataId,
         title: this.form.title.value
       }
-      this.$store.dispatch('tasks/update', payload)
+      this.$store.dispatch('updateTask', payload)
       this.form.title.isEditing = false
     },
     editComment() {
@@ -131,18 +135,18 @@ export default {
     },
     saveComment() {
       const payload = {
-        id: this.dataId,
+        key: this.dataId,
         comment: this.form.comment.value
       }
-      this.$store.dispatch('tasks/update', payload)
+      this.$store.dispatch('updateTask', payload)
       this.form.comment.isEditing = false
     },
     closeTask() {
-      this.$store.dispatch('tasks/close', { id: this.dataId })
+      this.$store.dispatch('closeTask', { key: this.dataId })
       this.$router.back()
     },
     openTask() {
-      this.$store.dispatch('tasks/open', { id: this.dataId })
+      this.$store.dispatch('openTask', { key: this.dataId })
       this.$router.back()
     }
   }
