@@ -1,8 +1,16 @@
 export const state = () => ({
+  user: {
+    uid: null,
+    email: null,
+    displayName: null
+  },
   tasks: {}
 })
 
 export const getters = {
+  isAuthenticated(state) {
+    return !!state.user.uid
+  },
   inbox(state) {
     const filteredTasks = {}
     Object.keys(state.tasks).forEach((key) => {
@@ -53,12 +61,27 @@ export const getters = {
 }
 
 export const mutations = {
+  setUser(state, payload) {
+    console.log('>>> commit setUser called.')
+    if (payload) {
+      state.user.uid = payload.uid || null
+      state.user.email = payload.email || null
+      state.user.displayName = payload.displayName || null
+    } else {
+      state.user.uid = null
+      state.user.email = null
+      state.user.displayName = null
+    }
+  },
   bindTasks(state, payload) {
     state.tasks = payload
   }
 }
 
 export const actions = {
+  setUser({ commit }, payload) {
+    commit('setUser', payload)
+  },
   async bindTasks({ commit }) {
     await this.$database.ref('tasks').on('value', (snapshot) => {
       commit('bindTasks', snapshot.val())

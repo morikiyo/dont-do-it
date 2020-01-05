@@ -27,7 +27,11 @@ export default {
   /*
    ** Plugins to load before mounting the App
    */
-  plugins: ['@/plugins/firebase.js'],
+  plugins: [
+    '@/plugins/firebase.js'
+    // TODO: ログインを維持するなら必要になりそう
+    // { src: '@/plugins/persistedstate.js', ssr: false }
+  ],
   /*
    ** Nuxt.js dev-modules
    */
@@ -43,6 +47,12 @@ export default {
     'bootstrap-vue/nuxt',
     '@nuxtjs/markdownit'
   ],
+  /*
+   ** Router configuration
+   */
+  router: {
+    middleware: ['auth']
+  },
   /*
    ** Build configuration
    */
